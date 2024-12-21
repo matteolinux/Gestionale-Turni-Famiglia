@@ -7,4 +7,100 @@ html, body {
 #calendar {
     margin: 20px;
     height: calc(100vh - 40px);
+}
+
+/* Stili per il modal */
+.turno-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+    min-width: 300px;
+}
+
+/* Stili per il select */
+.turno-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.turno-select:focus {
+    border-color: #2196F3;
+}
+
+/* Stili per i pulsanti */
+.turno-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.turno-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.turno-btn-conferma {
+    background-color: #2196F3;
+    color: white;
+}
+
+.turno-btn-conferma:hover {
+    background-color: #1976D2;
+}
+
+.turno-btn-annulla {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.turno-btn-annulla:hover {
+    background-color: #d5d5d5;
+}
+
+/* Stile per gli eventi nel calendario */
+.fc-event {
+    cursor: pointer;
+}
+
+.event-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    min-height: 24px;
+}
+
+.event-turno {
+    font-weight: 500;
+    font-size: 1.5em;
+}
+
+.event-orario {
+    font-size: 1.5em;
+    color: rgb(254, 254, 254);
+}
+
+/* Assicuriamoci che il contenuto HTML sia renderizzato correttamente */
+.fc-event-title {
+    width: 100%;
+}
+
+.fc-event-title-container {
+    padding: 0 !important;
 } 
