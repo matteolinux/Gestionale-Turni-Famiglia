@@ -56,22 +56,39 @@ document.addEventListener('DOMContentLoaded', function() {
             const modalDiv = document.createElement('div');
             modalDiv.className = 'turno-modal';
 
-            // Creiamo il select
-            const selectEl = document.createElement('select');
-            selectEl.className = 'turno-select';
+            // Creiamo il select per il genitore
+            const parentSelect = document.createElement('select');
+            parentSelect.className = 'turno-select';
+            
+            // Aggiungiamo le opzioni per i genitori
+            const defaultParentOption = document.createElement('option');
+            defaultParentOption.text = 'Seleziona genitore';
+            defaultParentOption.value = '';
+            parentSelect.appendChild(defaultParentOption);
+            
+            ['Matteo', 'Sara'].forEach(genitore => {
+                const option = document.createElement('option');
+                option.value = genitore;
+                option.text = genitore;
+                parentSelect.appendChild(option);
+            });
+
+            // Creiamo il select per i turni
+            const turnoSelect = document.createElement('select');
+            turnoSelect.className = 'turno-select';
             
             // Aggiungiamo un'opzione vuota come default
-            const defaultOption = document.createElement('option');
-            defaultOption.text = 'Seleziona un turno';
-            defaultOption.value = '';
-            selectEl.appendChild(defaultOption);
+            const defaultTurnoOption = document.createElement('option');
+            defaultTurnoOption.text = 'Seleziona un turno';
+            defaultTurnoOption.value = '';
+            turnoSelect.appendChild(defaultTurnoOption);
             
             // Popoliamo il select con i turni dal dizionario
             Object.keys(turni).forEach(turno => {
                 const option = document.createElement('option');
                 option.value = turno;
                 option.text = `${turno} (${turni[turno].inizio} - ${turni[turno].fine})`;
-                selectEl.appendChild(option);
+                turnoSelect.appendChild(option);
             });
 
             // Creiamo i pulsanti
@@ -88,16 +105,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Aggiungiamo gli eventi ai pulsanti
             confermaBtn.onclick = function() {
-                const turnoSelezionato = selectEl.value;
-                if (turnoSelezionato) {
+                const turnoSelezionato = turnoSelect.value;
+                const genitoreSelezionato = parentSelect.value;
+                if (turnoSelezionato && genitoreSelezionato) {
                     calendar.addEvent({
                         title: turnoSelezionato,
                         start: arg.start,
                         end: arg.end,
                         allDay: arg.allDay,
+                        className: genitoreSelezionato.toLowerCase(),
                         extendedProps: {
                             orarioInizio: turni[turnoSelezionato].inizio,
-                            orarioFine: turni[turnoSelezionato].fine
+                            orarioFine: turni[turnoSelezionato].fine,
+                            genitore: genitoreSelezionato
                         }
                     });
                 }
@@ -111,10 +131,12 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             // Assembliamo il modal
+            modalDiv.appendChild(parentSelect);
+            modalDiv.appendChild(document.createElement('br'));
+            modalDiv.appendChild(turnoSelect);
+            modalDiv.appendChild(buttonsDiv);
             buttonsDiv.appendChild(confermaBtn);
             buttonsDiv.appendChild(annullaBtn);
-            modalDiv.appendChild(selectEl);
-            modalDiv.appendChild(buttonsDiv);
             document.body.appendChild(modalDiv);
         },
         

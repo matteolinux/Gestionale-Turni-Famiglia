@@ -27,7 +27,7 @@ html, body {
 .turno-select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     font-size: 14px;
@@ -103,4 +103,21 @@ html, body {
 
 .fc-event-title-container {
     padding: 0 !important;
-} 
+}
+
+/* Stili per i turni in base al genitore */
+.sara {
+    background-color: #FF1493 !important; /* Fucsia */
+    border-color: #FF1493 !important;
+}
+
+.sara .event-turno,
+.sara .event-orario {
+    color: #000000 !important; /* Testo nero per i turni di Sara */
+}
+
+.matteo {
+    background-color: #2196F3 !important; /* Blu - colore default */
+    border-color: #2196F3 !important;
+}
+  </rewritten_file>
